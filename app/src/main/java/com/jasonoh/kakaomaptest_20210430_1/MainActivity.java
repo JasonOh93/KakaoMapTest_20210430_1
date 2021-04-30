@@ -83,6 +83,29 @@ public class MainActivity extends AppCompatActivity {
 
         mapView.addPOIItem(marker);
 
+        mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
+            @Override
+            public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+                Log.e("TAG", mapPOIItem.getItemName());
+                Toast.makeText(MainActivity.this, "adsf  ::  " + mapPOIItem.getItemName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+
+            }
+
+            @Override
+            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+
+            }
+
+            @Override
+            public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
+            }
+        });
+
     }
 
     @Override
