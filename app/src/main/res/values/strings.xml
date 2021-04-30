@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">KakaoMapTest_20210430_1</string>
+
+    <string name="kakao_key">kakao_app_key</string>
+</resources>
