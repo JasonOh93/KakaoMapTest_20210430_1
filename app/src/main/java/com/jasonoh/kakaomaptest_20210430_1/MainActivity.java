@@ -2,6 +2,7 @@ package com.jasonoh.kakaomaptest_20210430_1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -39,11 +40,18 @@ public class MainActivity extends AppCompatActivity {
         getHashKey();
 
 //위치정보 제공을 받기 위한 퍼미션 작업 추가..
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             int permissionResult = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
+            if(permissionResult != PackageManager.PERMISSION_GRANTED ||
+                    checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION};
+                requestPermissions( permissions, MAP_PERMISSIONS_REQUEST_CODE );
+            }
+        }else {
+            int permissionResult = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
             if(permissionResult != PackageManager.PERMISSION_GRANTED) {
                 String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
-                requestPermissions( permissions, MAP_PERMISSIONS_REQUEST_CODE );
+                ActivityCompat.requestPermissions(this, permissions, MAP_PERMISSIONS_REQUEST_CODE );
             }
         }
 
@@ -68,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 줌 레벨 변경
         // 숫자가 작을수록 내근처와 가깝게 보임
-        mapView.setZoomLevel( 7, true );
+        mapView.setZoomLevel( 3, true );
 
         // Zoom In, Out 허용 여부
         mapView.zoomIn(true);
