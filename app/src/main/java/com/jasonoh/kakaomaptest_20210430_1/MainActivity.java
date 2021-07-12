@@ -145,8 +145,11 @@ public class MainActivity extends AppCompatActivity {
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
-                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            } catch (NoSuchAlgorithmException e) {
+//                byte[] md = {
+//                        (byte) 0xCB,(byte) 0x24,(byte)0xAD,(byte)0xF3,(byte)0x01,(byte)0xE2,(byte)0xE1,(byte)0x40,(byte)0x94,(byte)0xEB,(byte)0xDE,(byte)0xE0,(byte)0x8C,(byte)0x36,(byte)0xF5,(byte)0xEC,(byte)0x6D,(byte)0x13,(byte)0xE7,(byte)0x80
+//                };
+                Log.e("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (Exception e) {
                 Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
             }
         }
